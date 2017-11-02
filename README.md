@@ -30,7 +30,7 @@ When the two records are from the set of true matches, there is still a chance t
 What is $Pr [ \gamma^1_r | ab_r \in U]$?
 
 ## Answer:
-In 2010, 50.9% of the U.S. population  was female ($p_f$). So the likelihood that records in the set of non-matches have the same sex is approximately equal to the population percentage, if the samples are large enough. If *sex* =  `m`, then that probability is $p_m =$ **49.1**, and if *sex* =  `f`, that probability is $p_f =$ **49.1**. Thus
+In 2010, 50.9% of the U.S. population  was female ($p_f$). So the likelihood that records in the set of non-matches have the same sex is approximately equal to the population percentage, if the samples are large enough. If *sex* =  `m`, then that probability is $p_m =$ **49.1**, and if *sex* =  `f`, that probability is $p_f =$ **50.9**. Thus
 \begin{eqnarray}
 Pr [ \gamma^1_r | ab_r \in U] & = & Pr [ \gamma^1_r | ab_r \in U , a = ``m"] Pr[ a = ``m"] \nonumber\\
                               &   & + Pr [ \gamma^1_r | ab_r \in U , a = ``f"] Pr[ a = ``f"] \nonumber\\
