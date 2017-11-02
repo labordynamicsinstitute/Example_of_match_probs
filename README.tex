@@ -1,0 +1,155 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Example of Fellegi-Sunter Match Probabilities},
+            pdfauthor={Lars Vilhuber},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{Example of Fellegi-Sunter Match Probabilities}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{Lars Vilhuber}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{November 1, 2017}
+
+
+\begin{document}
+\maketitle
+
+\section{Setup}\label{setup}
+
+From the \href{https://www.vrdc.cornell.edu/info747x}{INFO7470 lecture},
+we have \[
+R \equiv \frac{Pr [ \gamma_r | ab_r \in M]}{Pr[ \gamma_r | ab_r \in U]}
+\]
+
+In the lecture, John asks you to consider the case when the single
+variable under consideration is ``sex'':
+
+\[
+R \equiv \frac{Pr [ \gamma^1_r | ab_r \in M]}{Pr[ \gamma^1_r | ab_r \in U]}
+\]
+
+So assume that the binary variable \(a_1 = b_1 =\) \texttt{sex} in this
+dataset is coded \texttt{m} for male and \texttt{f} for female, and that
+due to entry errors it may be miscoded in \emph{A} about \textbf{1\%} of
+the time, but is recorded with \textbf{100\%} correctly in \emph{B}.
+Both datasets are drawn from and representative of the general U.S.
+population in 2010 (see f.i.
+\href{https://www.census.gov/prod/cen2010/briefs/c2010br-03.pdf}{Age and
+Sex Composition: 2010}).
+
+\section{Question 1}\label{question-1}
+
+What is \(Pr [ \gamma^1_r | ab_r \in M]\)?
+
+\subsection{Answer}\label{answer}
+
+When the two records are from the set of true matches, there is still a
+chance that the sex variable is miscoded on one of the two source
+records. Thus, up to \textbf{1\%}, the error rate in \emph{A},
+regardless of sex, \(Pr [ \gamma^1_r | ab_r \in M] =\) 0.99.
+
+\section{Question 2}\label{question-2}
+
+What is \(Pr [ \gamma^1_r | ab_r \in U]\)?
+
+\subsection{Answer:}\label{answer-1}
+
+In 2010, 50.9\% of the U.S. population was female (\(p_f\)). So the
+likelihood that records in the set of non-matches have the same sex is
+approximately equal to the population percentage, if the samples are
+large enough. If \emph{sex} = \texttt{m}, then that probability is
+\(p_m =\) \textbf{49.1}, and if \emph{sex} = \texttt{f}, that
+probability is \(p_f =\) \textbf{49.1}. Thus
+
+\begin{eqnarray}
+Pr [ \gamma^1_r | ab_r \in U] & = & Pr [ \gamma^1_r | ab_r \in U , a = ``m"] Pr[ a = ``m"] \nonumber\\
+                              &   & + Pr [ \gamma^1_r | ab_r \in U , a = ``f"] Pr[ a = ``f"] \nonumber\\
+                              & = & p_m^2 + p_f^2 \nonumber\\
+\end{eqnarray}
+
+= 0.500162
+
+\section{Question 3}\label{question-3}
+
+What then is \(w_r\)?
+
+\subsection{Answer}\label{answer-2}
+
+\(w_r = log_2(R^*) = log_2(\) 0.99 \(/\) 0.500162 \() \approx log_2(\)
+1.979 \() \approx\) 0.985.
+
+
+\end{document}

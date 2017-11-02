@@ -1,0 +1,72 @@
+---
+title: "Example of Fellegi-Sunter Match Probabilities"
+author: "Lars Vilhuber"
+date: "November 1, 2017"
+output:
+  html_document:
+    highlight: monochrome
+    keep_md: yes
+    theme: journal
+  pdf_document:
+    highlight: monochrome
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Setup
+From the [INFO7470 lecture](https://www.vrdc.cornell.edu/info747x), we have
+$$
+R \equiv \frac{Pr [ \gamma_r | ab_r \in M]}{Pr[ \gamma_r | ab_r \in U]}
+$$
+
+In the lecture, John asks you to consider the case when the single variable under consideration is "sex":
+
+$$
+R \equiv \frac{Pr [ \gamma^1_r | ab_r \in M]}{Pr[ \gamma^1_r | ab_r \in U]}
+$$
+```{r setup_prob, echo=FALSE}
+a_coding_error <- 0.01
+b_coding_error <- 0
+# from the source above:
+p.year <- 2010
+p_f <- 50.9
+p_m <- 100-p_f
+```
+
+So assume that the binary variable $a_1 = b_1 =$ `sex` in this dataset is coded `m` for male and `f` for female, and that due to entry errors it may be miscoded in *A* about **`r a_coding_error * 100`%** of the time, but is recorded with **`r 100 - ( b_coding_error * 100)`%** correctly in *B*. Both datasets are drawn from and representative of the general U.S. population in 2010 (see f.i. [Age and Sex Composition: 2010](https://www.census.gov/prod/cen2010/briefs/c2010br-03.pdf)). 
+
+# Question 1
+What is $Pr [ \gamma^1_r | ab_r \in M]$?
+```{r q1,echo=FALSE}
+# we gloss over the configured b_coding_error for now
+pr_g_m <- 1-a_coding_error
+```
+
+## Answer
+When the two records are from the set of true matches, there is still a chance that the sex variable is miscoded on one of the two source records. Thus, up to **`r a_coding_error*100`%**, the error rate in *A*, regardless of sex, $Pr [ \gamma^1_r | ab_r \in M] =$ `r pr_g_m`.
+
+# Question 2
+What is $Pr [ \gamma^1_r | ab_r \in U]$?
+
+## Answer:
+In `r p.year`, `r p_f`% of the U.S. population  was female ($p_f$). So the likelihood that records in the set of non-matches have the same sex is approximately equal to the population percentage, if the samples are large enough. If *sex* =  `m`, then that probability is $p_m =$ **`r p_m`**, and if *sex* =  `f`, that probability is $p_f =$ **`r p_m`**. Thus
+\begin{eqnarray}
+Pr [ \gamma^1_r | ab_r \in U] & = & Pr [ \gamma^1_r | ab_r \in U , a = ``m"] Pr[ a = ``m"] \nonumber\\
+                              &   & + Pr [ \gamma^1_r | ab_r \in U , a = ``f"] Pr[ a = ``f"] \nonumber\\
+                              & = & p_m^2 + p_f^2 \nonumber\\
+\end{eqnarray}
+```{r, echo=FALSE}
+pr_g_u <- (p_m/100)^2 + (p_f/100)^2
+```
+= `r pr_g_u`
+
+# Question 3
+
+What then is $w_r$?
+
+##Answer
+
+$w_r = log_2(R^*) = log_2($ `r (pr_g_m)` $/$ `r (pr_g_u)` $)  \approx log_2($ `r round((pr_g_m)/(pr_g_u),3)` $) \approx$  `r round(log2((pr_g_m)/(pr_g_u)),3)`.
