@@ -43,6 +43,6 @@ Pr [ \gamma^1_r | ab_r \in U] & = & Pr [ \gamma^1_r | ab_r \in U , a = ``m"] Pr[
 
 What then is $w_r$?
 
-##Answer
+## Answer
 
 $w_r = log_2(R^*) = log_2($ 0.99 $/$ 0.500162 $)  \approx log_2($ 1.979 $) \approx$  0.985.

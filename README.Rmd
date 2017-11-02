@@ -67,6 +67,6 @@ pr_g_u <- (p_m/100)^2 + (p_f/100)^2
 
 What then is $w_r$?
 
-##Answer
+## Answer
 
 $w_r = log_2(R^*) = log_2($ `r (pr_g_m)` $/$ `r (pr_g_u)` $)  \approx log_2($ `r round((pr_g_m)/(pr_g_u),3)` $) \approx$  `r round(log2((pr_g_m)/(pr_g_u)),3)`.
