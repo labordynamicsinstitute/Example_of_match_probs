@@ -3,6 +3,7 @@ Lars Vilhuber
 November 1, 2017  
 
 
+[View On GitHub](https://github.com/labordynamicsinstitute/Example_of_match_probs)
 
 # Setup
 From the [INFO7470 lecture](https://www.vrdc.cornell.edu/info747x), we have
@@ -17,7 +18,7 @@ R \equiv \frac{Pr [ \gamma^1_r | ab_r \in M]}{Pr[ \gamma^1_r | ab_r \in U]}
 $$
 
 
-So assume that the binary variable $a_1 = b_1 =$ `sex` in this dataset is coded `m` for male and `f` for female, and that due to entry errors it may be miscoded in *A* about **1%** of the time, but is recorded with **100%** correctly in *B*. Both datasets are drawn from and representative of the general U.S. population in 2010 (see f.i. [Age and Sex Composition: 2010](https://www.census.gov/prod/cen2010/briefs/c2010br-03.pdf)). 
+So assume that the binary variable $a_1 = b_1 =$ `sex` in this dataset is coded `m` for male and `f` for female, and that due to entry errors it may be miscoded in *A* about **1%** of the time, but is recorded with **100%** correctly in *B*. Both datasets are drawn from and representative of the general U.S. population in 2010 (see f.i. [Age and Sex Composition: 2010](https://www.census.gov/prod/cen2010/briefs/c2010br-03.pdf)).
 
 # Question 1
 What is $Pr [ \gamma^1_r | ab_r \in M]$?
